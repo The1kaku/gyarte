@@ -1,9 +1,9 @@
 #include <string>
+#include <vector>
 #ifndef LevelHeader
 #define LevelHeader
-
-using std::string;
-typedef string::size_type pos;
+#include "Actor.h"
+using std::string; using std::vector;
 
 struct Level
 {
@@ -11,6 +11,8 @@ struct Level
 	string model;
 	pos height, width;
 	const string getModel() const;
+	const char get(pos y, pos x) const;
+	Actor monsters[1] {('%')};
 };
 
 #endif

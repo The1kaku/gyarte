@@ -16,3 +16,11 @@ const string Level::getModel() const
 	}
 	return output;
 }
+
+const char Level::get(pos y, pos x) const
+{
+	if (y > height || x > width) return '\0';
+	char output;
+	string::const_iterator it = model.begin();
+	return *(it + (y * width) + x);
+}

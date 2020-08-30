@@ -1,8 +1,21 @@
 #include "Player.h"
 
-bool Player::testCollision(Level level, pos y, pos x)
+string Player::move(Level level, int dy, int dx)
 {
-	//if (y >= level.height || x >= level.width) return true;
-	if (*(level.model.begin() + level.width * (this->y + y)	+ (this->x + x)) == '#') return true;
-	return false;
+	char next = level.get(y() + dy, x() + dx);
+	for (auto monster : level.monsters)
+		if (y() + dy == monster.y && x() + dx == monster.x)
+			next = monster.model;
+		
+	switch (next)
+	{
+		case '#': case '\0':
+			return "Could not move there!";
+		case '%':
+			return "You attacked a monster!";
+		default:
+			me.y += dy;
+			me.x += dx;
+			return "You moved";
+	}
 }
