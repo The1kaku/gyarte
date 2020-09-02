@@ -2,5 +2,5 @@
 
 main()
 {	
-	Game game("levels/two.level");
+	Game game("levels/agnes.level");
 }
