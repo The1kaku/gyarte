@@ -1,12 +1,13 @@
 #ifndef GameHeader
 #define GameHeader
 
-#include <vector>
 #include "Player.h"
 #include "Level.h"
 #include <string>
 #include <curses.h>
-#include <vector>
+#include <deque>
+
+using std::deque;
 
 class Game
 {
@@ -14,18 +15,25 @@ class Game
 	Player player;
 	bool running = true; 
 	string infoMessage;
+	const pos INFO_WIN_HEIGHT = 30;
+	deque<string> infoMessages;
 	WINDOW *main;
 	WINDOW *info;
 	
-	void updateScreen(); // updates the screen
+	void loop();
+	void init();
+	void updateScreen(); 
 	int getInput();
-	string manageInput();
+	void manageInput();
+	void updateInfoMessages(); 
 	
 	public:
 	Game(char playerModel, pos levelHeight, pos levelWidth, string levelModel);
 	Game(pos levelHeight, pos levelWidth, string levelModel);
+	Game(char playerModel, string url);
+	Game(string url);
 	~Game();
-	void loop(); // Starts the game loop
+	 
 };
 
 #endif

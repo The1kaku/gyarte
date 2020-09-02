@@ -1,18 +1,17 @@
 #include "Game.h"
+#include <iostream>
 
 
 Game::Game(char playerModel, pos levelHeight, pos levelWidth, string levelModel) : player(playerModel), level(levelHeight, levelWidth, levelModel) 
 { 
-	initscr();
-	noecho();
-	main = newwin(20, 20, 0, 0);
-	info = newwin(20, 30, 0, 20);
-	keypad(main, true);
-	
-	loop();
+	init();
 }
 
 Game::Game(pos levelHeight, pos levelWidth, string levelModel) : Game('@', levelHeight, levelWidth, levelModel) { }
+
+Game::Game(char playerModel, string url) : player(playerModel), level(url) { init(); }
+
+Game::Game(string url) : Game('@', url) { }
 
 Game::~Game()
 {
@@ -20,53 +19,74 @@ Game::~Game()
 	endwin();
 }
 
+
+void Game::init()
+{
+	initscr();
+	noecho();
+	main = newwin(level.height + 2, level.width + 2, 0, 0);
+	info = newwin(INFO_WIN_HEIGHT, 45,(level.height + 4), 0 );
+	keypad(main, true);
+	
+	loop();
+}
 void Game::loop()
 {
 	while (running)
 	{
-		infoMessage += manageInput();
-		//handleAi();
+		manageInput();
+		updateInfoMessages();
 		updateScreen();		
-		infoMessage.clear();
 	}
-
 }
 
 void Game::updateScreen()
 {
 	wclear(main);
-	waddstr(main, level.getModel().c_str());
+	waddstr(main, level.model.c_str());
 	for (auto monster : level.monsters)
 		mvwaddch(main, monster.y, monster.x, monster.model);
+	for (auto item : level.items)
+		mvwaddch(main, item.y, item.x, item.model);
 	mvwaddch(main, player.y(), player.x(), player.model());
 	wrefresh(main);
 	
-	waddstr(info, infoMessage.c_str());
-	waddch(info, '\n');
+	wclear(info);
+	for (auto message : infoMessages)
+		waddstr(info, message.c_str());
 	wrefresh(info);
 }
 
-int Game::getInput()
+void Game::manageInput()
 {
-	return getch();
-}
-
-string Game::manageInput()
-{
-	switch (getInput())
+	switch (getch())
 	{
 		case 'w': 
-			return player.mvup(level);
+			player.mvup(level, infoMessage);
+			break;
 		case 'a':
-			return player.mvlt(level);
+			player.mvlt(level, infoMessage);
+			break;
 		case 'r':
-			return player.mvdn(level);
+			player.mvdn(level, infoMessage);
+			break;
 		case 's':
-			return player.mvrt(level);
+			player.mvrt(level, infoMessage);
+			break;
 		case 'e':
 			running = false;
-			return "quit";
+			infoMessage = "Quit!";
+			break;
 		default:
-			return "Invalid input";
+			infoMessage = "Invalid Input!";
+			break;
 	}
+}
+
+void Game::updateInfoMessages()
+{
+	infoMessages.push_back(infoMessage);
+	infoMessage.clear();
+	if (infoMessages.size() > INFO_WIN_HEIGHT / 2)
+		infoMessages.pop_front();	
 }

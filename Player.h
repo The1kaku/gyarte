@@ -8,18 +8,20 @@ class Player
 {
 	Actor me;
 	
-	string move(Level level, int y, int x);
+	void move(Level, string&, int, int);
 	
 	public:
 	Player(char model) : me(model) { }
 	
-	string mvup(Level level) { return move(level, -1, 0); }
-	string mvdn(Level level) { return move(level, 1, 0); }
-	string mvlt(Level level) { return move(level, 0, -1); }
-	string mvrt(Level level) { return move(level, 0, 1); }
+	void mvup(Level level, string& infoMessage) { move(level, infoMessage, -1,  0); }
+	void mvdn(Level level, string& infoMessage) { move(level, infoMessage,  1,  0); }
+	void mvlt(Level level, string& infoMessage) { move(level, infoMessage,  0, -1); }
+	void mvrt(Level level, string& infoMessage) { move(level, infoMessage,  0,  1); }
 	pos x() const { return me.x; }
 	pos y() const { return me.y; }
 	char model() const { return me.model; }
 };
 
+	void handleCollisionInput(string&, bool&, char);
+	void handleItemInput(string&, char);
 #endif
