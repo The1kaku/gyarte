@@ -19,6 +19,9 @@ class Player
 	void mvrt(Level level, string& infoMessage) { move(level, infoMessage,  0,  1); }
 	pos x() const { return me.x; }
 	pos y() const { return me.y; }
+	string health() const { return std::to_string(me.health); }
+	string strength() const { return std::to_string(me.strength); }
+	string speed() const { return std::to_string(me.speed); }
 	char model() const { return me.model; }
 };
 

@@ -24,9 +24,12 @@ void Game::init()
 {
 	initscr();
 	noecho();
-	main = newwin(level.height + 2, level.width + 2, 0, 0);
-	info = newwin(INFO_WIN_HEIGHT, 45,(level.height + 4), 0 );
-	keypad(main, true);
+	
+	mainWin = newwin(level.height + 2, level.width + 2, 0, 0);
+	infoWin = newwin(INFO_WIN_HEIGHT, 45, level.height + 4, 0 );
+	playerStatsWin = newwin(level.height + 2, 30, 0, level.width + 4);
+	
+	keypad(mainWin, true);
 	
 	loop();
 }
@@ -42,19 +45,26 @@ void Game::loop()
 
 void Game::updateScreen()
 {
-	wclear(main);
-	waddstr(main, level.model.c_str());
+	wclear(mainWin);
+	waddstr(mainWin, level.model.c_str());
 	for (auto monster : level.monsters)
-		mvwaddch(main, monster.y, monster.x, monster.model);
+		mvwaddch(mainWin, monster.y, monster.x, monster.model);
 	for (auto item : level.items)
-		mvwaddch(main, item.y, item.x, item.model);
-	mvwaddch(main, player.y(), player.x(), player.model());
-	wrefresh(main);
+		mvwaddch(mainWin, item.y, item.x, item.model);
+	mvwaddch(mainWin, player.y(), player.x(), player.model());
+	wrefresh(mainWin);
 	
-	wclear(info);
+	wclear(infoWin);
 	for (auto message : infoMessages)
-		waddstr(info, message.c_str());
-	wrefresh(info);
+		waddstr(infoWin, message.c_str());
+	wrefresh(infoWin);
+	
+	wclear(playerStatsWin);
+	waddstr(playerStatsWin, "PLAYER STATS:\n\n  HEALTH: \n  STRENGTH: \n  SPEED:\n");
+	mvwaddstr(playerStatsWin, 2, 14, player.health().c_str());
+	mvwaddstr(playerStatsWin, 3, 14, player.strength().c_str());
+	mvwaddstr(playerStatsWin, 4, 14, player.speed().c_str());
+	wrefresh(playerStatsWin);
 }
 
 void Game::manageInput()

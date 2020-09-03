@@ -16,14 +16,15 @@ class Game
 	bool running = true; 
 	string infoMessage;
 	const pos INFO_WIN_HEIGHT = 30;
+	const pos PLAYERSTATS_WIN_HEIGHT = 10;
 	deque<string> infoMessages;
-	WINDOW *main;
-	WINDOW *info;
+	WINDOW *mainWin;
+	WINDOW *infoWin;
+	WINDOW *playerStatsWin;
 	
 	void loop();
 	void init();
 	void updateScreen(); 
-	int getInput();
 	void manageInput();
 	void updateInfoMessages(); 
 	
