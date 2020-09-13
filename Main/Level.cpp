@@ -7,6 +7,7 @@ Level::Level(string url) : height(0), width(0)
 
 	if (newLevel.is_open())
 	{
+		
 		while (getline(newLevel, line))
 			model += line += '\n';
 		
@@ -28,6 +29,36 @@ Level::Level(string url) : height(0), width(0)
 		collisionModel = model;	
 		collisionModel.erase(std::remove(collisionModel.begin(), collisionModel.end(), '\n'), collisionModel.end());
 	}	
+	
+	string::iterator modelIt = model.begin();
+	pos rowPos = 0, colPos = 0;
+	for (; modelIt != model.end(); ++modelIt, ++rowPos) 
+	{
+		if (rowPos == width + 1)
+		{
+			rowPos = 0;
+			++colPos;
+		}
+		if (generateEntity(*modelIt, colPos, rowPos))
+			*modelIt = ':';
+	}
+}
+
+bool Level::generateEntity(char entityModel, pos y, pos x)
+{
+	switch (entityModel)
+	{
+		case ' ':
+		return false;
+		case '%': case '&':
+			monsters.emplace_back(entityModel, y, x);
+			return true;
+		case 'c':
+			items.emplace_back(entityModel, y, x);
+			return true;
+		default:
+		return false;
+	}
 }
 
 const string Level::getModel() const

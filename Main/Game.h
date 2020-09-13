@@ -1,11 +1,12 @@
 #ifndef GameHeader
 #define GameHeader
 
-#include "Player.h"
+#include "../EntityClasses/Player.h"
 #include "Level.h"
+#include "curses.h"
 #include <string>
-#include <curses.h>
 #include <deque>
+#include <iostream>
 
 using std::deque;
 
@@ -15,18 +16,20 @@ class Game
 	Player player;
 	bool running = true; 
 	string infoMessage;
-	const pos INFO_WIN_HEIGHT = 30;
+	const pos INFO_WIN_HEIGHT = 10;
 	const pos PLAYERSTATS_WIN_HEIGHT = 10;
 	deque<string> infoMessages;
 	WINDOW *mainWin;
 	WINDOW *infoWin;
 	WINDOW *playerStatsWin;
+	WINDOW *monsterStatsWin;
 	
 	void loop();
 	void init();
 	void updateScreen(); 
 	void manageInput();
 	void updateInfoMessages(); 
+	void updateMonsters();
 	
 	public:
 	Game(char playerModel, pos levelHeight, pos levelWidth, string levelModel);

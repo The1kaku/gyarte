@@ -26,8 +26,9 @@ void Game::init()
 	noecho();
 	
 	mainWin = newwin(level.height + 2, level.width + 2, 0, 0);
-	infoWin = newwin(INFO_WIN_HEIGHT, 45, level.height + 4, 0 );
-	playerStatsWin = newwin(level.height + 2, 30, 0, level.width + 4);
+	infoWin = newwin(INFO_WIN_HEIGHT, 80, level.height + 4, 0 );
+	playerStatsWin = newwin(level.height + 4, 30, 0, level.width + 4);
+	monsterStatsWin = newwin(level.height + 4, 30, 0, level.width + 30);
 	
 	keypad(mainWin, true);
 	
@@ -39,6 +40,7 @@ void Game::loop()
 	{
 		manageInput();
 		updateInfoMessages();
+		updateMonsters();
 		updateScreen();		
 	}
 }
@@ -60,11 +62,33 @@ void Game::updateScreen()
 	wrefresh(infoWin);
 	
 	wclear(playerStatsWin);
-	waddstr(playerStatsWin, "PLAYER STATS:\n\n  HEALTH: \n  STRENGTH: \n  SPEED:\n");
+	waddstr(playerStatsWin, "PLAYER STATS:\n\n  HEALTH:\n  STRENGTH:\n  SPEED:\n  COINS:\n  ");
 	mvwaddstr(playerStatsWin, 2, 14, player.health().c_str());
 	mvwaddstr(playerStatsWin, 3, 14, player.strength().c_str());
 	mvwaddstr(playerStatsWin, 4, 14, player.speed().c_str());
+	mvwaddstr(playerStatsWin, 5, 14, player.coins().c_str());
+
 	wrefresh(playerStatsWin);
+	
+	wclear(monsterStatsWin);
+	waddstr(monsterStatsWin, "MONSTER STATS:\n\n  NUMMON:\n");
+	mvwaddstr(monsterStatsWin, 2, 14, std::to_string(level.monsters.size()).c_str());
+	wmove(monsterStatsWin, 3, 2);
+	int y = 3;
+	for (auto monster : level.monsters)
+	{
+		waddch(monsterStatsWin, monster.model);
+		waddstr(monsterStatsWin, " {");
+		waddstr(monsterStatsWin, std::to_string(monster.y).c_str());
+		waddstr(monsterStatsWin, ", ");
+		waddstr(monsterStatsWin, std::to_string(monster.x).c_str());
+		waddstr(monsterStatsWin, "} : HP(");
+		waddstr(monsterStatsWin, std::to_string(monster.health).c_str());
+		waddstr(monsterStatsWin, ")");
+		++y;
+		wmove(monsterStatsWin, y, 2);
+	}
+	wrefresh(monsterStatsWin);	
 }
 
 void Game::manageInput()
@@ -85,10 +109,10 @@ void Game::manageInput()
 			break;
 		case 'e':
 			running = false;
-			infoMessage = "Quit!";
+			infoMessage = "Quit!\n";
 			break;
 		default:
-			infoMessage = "Invalid Input!";
+			infoMessage = "Invalid Input!\n";
 			break;
 	}
 }
@@ -99,4 +123,12 @@ void Game::updateInfoMessages()
 	infoMessage.clear();
 	if (infoMessages.size() > INFO_WIN_HEIGHT / 2)
 		infoMessages.pop_front();	
+}
+
+void Game::updateMonsters()
+{
+	list<Actor>::iterator monsterIterator = level.monsters.begin();
+	for (; !level.monsters.empty() && monsterIterator != level.monsters.end(); ++monsterIterator)
+		if (monsterIterator->health <= 0) 
+			monsterIterator = level.monsters.erase(monsterIterator);	
 }
