@@ -1,16 +1,27 @@
-#include "Player.h"
+#ifndef GAME_H
+#define GAME_H
+
+#include "AiProcessor.h"
+#include "Window.h"
 #include "Level.h"
-#include "Enemy.h"
-#include <string>
-#ifndef GameHeader
-#define GameHeader
+#include <vector>
+
+using std::vector;
 
 struct Game
 {
-	Game(char playerModel, pos levelHeight, pos levelWidth, string levelModel) : player(playerModel), level(levelHeight, levelWidth, levelModel) { }
-	Player player;
+	Game();
+	~Game();
+	
+	AiProcessor aiProcessor;
+	
 	Level level;
-	Enemy enemy;
+	Window gameWin;
+	Window playerWin;
+	Window infoWin;
+	
+	void init();
+	void loop();
 };
 
 #endif
