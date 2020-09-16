@@ -7,22 +7,43 @@ int AiProcessor::processAi(Actor &actor, intMap colMap)
 		case 0:
 		return 1;
 		case 1:
-		return backAndForth(actor, colMap);
+		return circle(actor, colMap);
 		default:
 		return 0;
 	}
 }
 
-int AiProcessor::backAndForth(Actor &actor, intMap colMap)
+int AiProcessor::circle(Actor &actor, intMap colMap)
 {
-	if (move(actor, colMap, 0, 1))
-		return 1;
-	if (move(actor, colMap, 1, 0))
-		return 2;
-	if (move(actor, colMap, 0, -1))
-		return 3;
-	if (move(actor, colMap, -1, 0))
-		return 4;
+	static int dx = 1, dy = 0; 
 	
-	return 0; 
+	int result = move(actor, colMap, dy, dx);
+
+	if (result == 0)
+	{
+		if(dy == 0 && dx == 1)
+		{
+			dy = 1;
+			dx = 0;
+		}
+		else if(dy == 1 && dx == 0)
+		{
+			dy = 0;
+			dx = -1;
+		}
+		else if(dy == 0 && dx == -1)
+		{
+			dy = -1;
+			dx = 0;
+		}
+		else
+		{
+			dy = 0;
+			dx = 1;
+		}
+		
+		result = move(actor, colMap, dy, dx);
+	}
+
+	return result;
 }

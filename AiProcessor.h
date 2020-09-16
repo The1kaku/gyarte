@@ -19,7 +19,7 @@ class AiProcessor
 	
 	int processAi(Actor &actor, intMap colMap);
 	
-	int backAndForth(Actor &actor, intMap colMap);
+	int circle(Actor &actor, intMap colMap);
 };
 
 #endif
