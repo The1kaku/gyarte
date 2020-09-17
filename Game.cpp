@@ -3,7 +3,7 @@
 Game::Game() : 	gameWin(levelHeight, levelWidth + 1, 0, 0, true), 
 				playerWin(20, 20, 0, 41, true), 
 				infoWin(20, 20, 21, 21, true),
-				level(1, "######\n#....#\n#....#\n#....#\n######")
+				level(1, "########\n#......#\n#......#\n#......#\n########")
 {
 	init();
 	loop();
@@ -34,14 +34,14 @@ void Game::loop()
 {
 	while (getch() != 'e')
 	{
+		aiProcessor.setColMap(level.generateColMap());
 		gameWin.clear();
 		infoWin.clear();
-		gameWin.displayLevel(level);
+		gameWin.addLevel(level);
 		for (auto &monster : level.monsters)
 		{
-			
-			waddch(infoWin.win, aiProcessor.processAi(monster, level.getCol()) + 48);
-			gameWin.displayActor(monster);
+			infoWin.addInt(aiProcessor.processAi(monster));
+			gameWin.addActor(monster);
 		}
 		gameWin.refresh();
 		infoWin.refresh();

@@ -18,17 +18,17 @@ struct Level
 	void createMapFromUrl(string url);
 	void createMapFromString(string str); 
 	const char *getMap() const;
-	const char *getColMap() const;
-	const int getCol(pos y, pos x) const;
-	vector< vector< int>> &getCol();
 	
+	IntMap generateColMap();
+	int getColMapPos(pos y, pos x) const;
+	IntMap &getColMap();	
 	int getColType(char c);
-	void createColMap();
+	IntMap initColMap();
 	
 	vector< string> map;
-	vector< vector< int>> colMap;	
+	IntMap colMap;	
 	
-	vector< Actor> monsters = {Actor(1, 1, 'M', true, 1)};
+	vector< Actor> monsters = {Actor(1, 1, 'M', true, 1), Actor(1, 4, 'N', true, 0)};
 };
 
 #endif

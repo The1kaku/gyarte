@@ -12,14 +12,14 @@ using std::vector;
 class AiProcessor
 {
 	private:
-	intMap colMap;
+	IntMap colMap;
 
 	public:
-	void setColMap(intMap colMap) { this->colMap = colMap; }
+	void setColMap(IntMap colMap) { this->colMap = colMap; }
 	
-	int processAi(Actor &actor, intMap colMap);
+	int processAi(Actor &actor);
 	
-	int circle(Actor &actor, intMap colMap);
+	int circle(Actor &actor);
 };
 
 #endif

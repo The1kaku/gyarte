@@ -18,18 +18,23 @@ void Window::destroy()
 	delwin(win);
 }
 
-void Window::displayLevel(Level level)
+void Window::addLevel(Level level)
 {
 	waddstr(win, level.getMap());
 }
 
-void Window::displayActor(Actor actor)
+void Window::addActor(Actor actor)
 {
 	if (actor.visible)
 	{
 		wmove(win, actor.y, actor.x);
 		waddch(win, actor.model);
 	}
+}
+
+void Window::addInt(int i)
+{
+	waddstr(win, std::to_string(i).c_str());
 }
 
 void Window::refresh()

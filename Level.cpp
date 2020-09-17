@@ -9,7 +9,7 @@ Level::Level(int initType, string initVal)
 		break;
 		case 1:
 		createMapFromString(initVal);
-		createColMap();
+		initColMap();
 		break;
 		default:
 		break;
@@ -64,7 +64,7 @@ int Level::getColType(const char c)
 	return 1;
 }
 
-void Level::createColMap()
+IntMap Level::initColMap()
 {
 	for (vector< string>::const_iterator mapRowIt = map.cbegin(); mapRowIt != map.cend(); ++mapRowIt)
 	{
@@ -75,29 +75,25 @@ void Level::createColMap()
 		}
 		colMap.emplace_back(row);
 	}
+	return colMap;
 }
 
-const char *Level::getColMap() const
-{
-	string res;
-	
-	for (vector< vector< int>>::const_iterator rowIt = colMap.cbegin(); rowIt != colMap.cend(); ++rowIt)
-	{
-		for (vector< int>::const_iterator colIt = rowIt->cbegin(); colIt != rowIt->cend(); ++colIt)
-		{
-			res.push_back(*colIt + 48);
-		}
-		res.push_back('\n');
-	}
-	return res.c_str();
-}
-
-vector< vector< int>> &Level::getCol()
+IntMap &Level::getColMap()
 {
 	return colMap;
 }
 
-const int Level::getCol(pos y, pos x) const
+int Level::getColMapPos(pos y, pos x) const
 {
 	return colMap[y][x];
+}
+
+IntMap Level::generateColMap()
+{
+	IntMap res = colMap;
+	for (auto monster : monsters)
+	{
+		res[monster.y][monster.x] = (monster.visible) ? 1 : 0;
+	}
+	return res;
 }

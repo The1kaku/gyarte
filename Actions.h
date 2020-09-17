@@ -5,9 +5,9 @@
 #include "Actor.h"
 #include "Level.h"
 
-int checkCollision(intMap colMap, pos y, pos x); 
+int checkCollision(IntMap colMap, pos y, pos x); 
 
-int move(Actor &actor, intMap colMap, int dy, int dx);
+int move(Actor &actor, IntMap colMap, int dy, int dx);
 
 
 #endif

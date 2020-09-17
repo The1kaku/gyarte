@@ -1,11 +1,11 @@
 #include "Actions.h"
 
-int checkCollision(intMap colMap, pos y, pos x)
+int checkCollision(IntMap colMap, pos y, pos x)
 { 
 	return colMap[y][x];
 }
 
-int move(Actor &actor, intMap colMap, int dy, int dx)
+int move(Actor &actor, IntMap colMap, int dy, int dx)
 {
 	if (actor.y + dy <= 0 || actor.x + dx <= 0 || actor.y + dy >= levelHeight || actor.x + dx >= levelWidth)
 		return 0;

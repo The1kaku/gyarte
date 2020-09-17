@@ -13,8 +13,9 @@ struct Window
 	WINDOW *create();
 	void destroy();
 	
-	void displayLevel(Level level);
-	void displayActor(Actor actor);
+	void addLevel(Level level);
+	void addActor(Actor actor);
+	void addInt(int i);
 	void refresh();
 	void clear();
 	

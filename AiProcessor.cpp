@@ -1,19 +1,19 @@
 #include "AiProcessor.h"
 
-int AiProcessor::processAi(Actor &actor, intMap colMap)
+int AiProcessor::processAi(Actor &actor)
 {
 	switch(actor.aiType)
 	{
 		case 0:
 		return 1;
 		case 1:
-		return circle(actor, colMap);
+		return circle(actor);
 		default:
 		return 0;
 	}
 }
 
-int AiProcessor::circle(Actor &actor, intMap colMap)
+int AiProcessor::circle(Actor &actor)
 {
 	static int dx = 1, dy = 0; 
 	
