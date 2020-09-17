@@ -34,12 +34,12 @@ void Game::loop()
 {
 	while (getch() != 'e')
 	{
-		aiProcessor.setColMap(level.generateColMap());
 		gameWin.clear();
 		infoWin.clear();
 		gameWin.addLevel(level);
 		for (auto &monster : level.monsters)
 		{
+			aiProcessor.setColMap(level.generateColMap());
 			infoWin.addInt(aiProcessor.processAi(monster));
 			gameWin.addActor(monster);
 		}

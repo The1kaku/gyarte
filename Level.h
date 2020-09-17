@@ -28,7 +28,7 @@ struct Level
 	vector< string> map;
 	IntMap colMap;	
 	
-	vector< Actor> monsters = {Actor(1, 1, 'M', true, 1), Actor(1, 4, 'N', true, 0)};
+	vector< Actor> monsters = {Actor(1, 1, 'M', true, 1), Actor(2, 2, 'N', true, 1)};
 };
 
 #endif
