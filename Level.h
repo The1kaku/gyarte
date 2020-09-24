@@ -1,7 +1,6 @@
 #ifndef LEVEL_H
 #define LEVEL_H
 
-#include <array>
 #include <vector>
 #include <fstream>
 #include <sstream>
@@ -19,7 +18,7 @@ struct Level
 	void createMapFromString(string str); 
 	const char *getMap() const;
 	
-	IntMap generateColMap();
+	IntMap generateColMap(Actor playerActor);
 	int getColMapPos(pos y, pos x) const;
 	IntMap &getColMap();	
 	int getColType(char c);
@@ -28,7 +27,7 @@ struct Level
 	vector< string> map;
 	IntMap colMap;	
 	
-	vector< Actor> monsters = {Actor(1, 1, 'M', true, 1), Actor(2, 2, 'N', true, 1)};
+	vector< Actor> monsters = {Actor(2, 2, 'N', true, 1)};
 };
 
 #endif

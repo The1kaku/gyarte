@@ -1,5 +1,4 @@
-g++ *.cpp -c -lpdcurses
-g++ *.o -o main -lpdcurses
+g++ *.cpp -c -lpdcurses -std=c++17
+g++ *.o -o main -lpdcurses -std=c++17
 rm -f *.o
-start main
-exit
+main

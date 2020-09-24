@@ -88,12 +88,13 @@ int Level::getColMapPos(pos y, pos x) const
 	return colMap[y][x];
 }
 
-IntMap Level::generateColMap()
+IntMap Level::generateColMap(Actor playerActor)
 {
 	IntMap res = colMap;
 	for (auto monster : monsters)
 	{
-		res[monster.y][monster.x] = (monster.visible) ? 1 : 0;
+		res[monster.y][monster.x] = ((monster.visible) ? 1 : 0);
 	}
+	res[playerActor.y][playerActor.x] = ((playerActor.visible) ? 1 : 0);
 	return res;
 }

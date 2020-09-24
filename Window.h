@@ -15,6 +15,7 @@ struct Window
 	
 	void addLevel(Level level);
 	void addActor(Actor actor);
+	void addch(int c);
 	void addInt(int i);
 	void refresh();
 	void clear();

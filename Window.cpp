@@ -32,6 +32,11 @@ void Window::addActor(Actor actor)
 	}
 }
 
+void Window::addch(int c)
+{
+	waddch(win, c);
+}
+
 void Window::addInt(int i)
 {
 	waddstr(win, std::to_string(i).c_str());
