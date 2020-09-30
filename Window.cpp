@@ -32,6 +32,16 @@ void Window::addActor(Actor actor)
 	}
 }
 
+void Window::addStr(string str)
+{
+	wprintw(win, str.c_str());
+}
+
+void Window::addMap(string map)
+{
+	addStr(map);
+}
+
 void Window::addch(int c)
 {
 	waddch(win, c);

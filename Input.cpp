@@ -5,7 +5,7 @@ int InputProcessor::process(int input, Player &player)
 {
 	switch (input)
 	{
-		case KEY_F(1):
+		case KEY_F(1): case 'e':
 			*running = false;
 			return 1;
 		case KEY_UP: 

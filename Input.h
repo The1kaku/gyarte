@@ -15,8 +15,8 @@ struct InputProcessor
 	
 	public:
 	void setRunVar(bool *running) { this->running = running; }	
- 	void setColMap(IntMap colMap) { this->colMap = colMap; }
-	void setMonsterVec(std::vector< Actor> *monsters) { this->monsters = monsters; }
+ 	void updateColMap(IntMap colMap) { this->colMap = colMap; }
+	void updateMonsterVec(std::vector< Actor> *monsters) { this->monsters = monsters; }
 	
 	int process(int input, Player &player);
 };

@@ -30,6 +30,12 @@ struct Game
 	
 	void init();
 	void loop();
+	
+	void clearWindows();
+	void playerTurn();
+	void aiTurn();
+	void updateInfo();
+	void refreshWindows();
 };
 
 #endif
