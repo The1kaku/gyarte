@@ -6,6 +6,7 @@
 #include "Level.h"
 #include "Actions.h"
 #include <vector>
+#include "astar.h"
 
 using std::vector;
 
@@ -13,9 +14,13 @@ class AiProcessor
 {
 	private:
 	IntMap colMap;
+	Actor *player;
 
 	public:
-	void setColMap(IntMap colMap) { this->colMap = colMap; }
+	
+	AiProcessor(Actor* player) : player(player) {}
+	void updateColMap(IntMap colMap) { this->colMap = colMap; }
+	void updatePlayer(Actor* player) { this->player = player; }
 	
 	int processAi(Actor &actor);
 	

@@ -27,6 +27,8 @@ struct Game
 	Window gameWin;
 	Window playerWin;
 	Window infoWin;
+
+	string currMap;
 	
 	void init();
 	void loop();

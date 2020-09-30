@@ -49,7 +49,6 @@ const char *Level::getMap() const
 	for (vector< string>::const_iterator rowIt = map.cbegin(); rowIt != map.cend(); ++rowIt)
 	{
 		res.append(*rowIt);
-		res.push_back('\n');
 	}
 	return res.c_str();
 }
@@ -88,13 +87,13 @@ int Level::getColMapPos(pos y, pos x) const
 	return colMap[y][x];
 }
 
-IntMap Level::generateColMap(Actor playerActor)
+IntMap Level::generateColMap()
 {
 	IntMap res = colMap;
 	for (auto monster : monsters)
 	{
 		res[monster.y][monster.x] = ((monster.visible) ? 1 : 0);
 	}
-	res[playerActor.y][playerActor.x] = ((playerActor.visible) ? 1 : 0);
+	
 	return res;
 }

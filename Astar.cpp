@@ -16,40 +16,40 @@ vector< Position> Astar::compute(IntMap colMap)
 	
 	while (!openList.empty())
 	{
-		clear();
-		mvprintw(28, 0, "IntMap size = {");
-		printw(std::to_string(colMap.size()).c_str());
-		addch(',');
-		printw(std::to_string(colMap.front().size()).c_str());
-		addch('}');
-		mvprintw(29, 0, "IterationNum = ");
-		printw(std::to_string(i).c_str());
-		mvprintw(30, 0, "OpenListSize = ");
-		printw(std::to_string(openList.size()).c_str());
-		int idxNodeP = 1;
-		for (auto node : openList)
-		{	
-			mvprintw(30 + idxNodeP, 0, "Node = {");
-			printw(std::to_string(node.y).c_str());
-			addch(',');
-			printw(std::to_string(node.x).c_str());
-			printw("} (");
-			printw(std::to_string(node.parentY).c_str());
-			addch(',');
-			printw(std::to_string(node.parentX).c_str());
-			printw("), g = ");
-			printw(std::to_string(node.g).c_str());
-			printw(", h = ");
-			printw(std::to_string(node.h).c_str());
-			printw(", f = ");
-			printw(std::to_string(node.f).c_str());
+		// clear();
+		// mvprintw(28, 0, "IntMap size = {");
+		// printw(std::to_string(colMap.size()).c_str());
+		// addch(',');
+		// printw(std::to_string(colMap.front().size()).c_str());
+		// addch('}');
+		// mvprintw(29, 0, "IterationNum = ");
+		// printw(std::to_string(i).c_str());
+		// mvprintw(30, 0, "OpenListSize = ");
+		// printw(std::to_string(openList.size()).c_str());
+		// int idxNodeP = 1;
+		// for (auto node : openList)
+		// {	
+			// mvprintw(30 + idxNodeP, 0, "Node = {");
+			// printw(std::to_string(node.y).c_str());
+			// addch(',');
+			// printw(std::to_string(node.x).c_str());
+			// printw("} (");
+			// printw(std::to_string(node.parentY).c_str());
+			// addch(',');
+			// printw(std::to_string(node.parentX).c_str());
+			// printw("), g = ");
+			// printw(std::to_string(node.g).c_str());
+			// printw(", h = ");
+			// printw(std::to_string(node.h).c_str());
+			// printw(", f = ");
+			// printw(std::to_string(node.f).c_str());
 	
-			idxNodeP++;
-		}
-		printw("\nDone!");
-		refresh();
-		i++;
-		getch();
+			// idxNodeP++;
+		// }
+		// printw("\nDone!");
+		// refresh();
+		// i++;
+		// getch();
 	
 
 		// currentNode is the node with the lowest f value.
@@ -85,8 +85,6 @@ vector< Position> Astar::compute(IntMap colMap)
 				}
 			}	
 
-			std::reverse(res.begin(), res.end());
-
 			return res;
 		}
 
@@ -102,7 +100,7 @@ vector< Position> Astar::compute(IntMap colMap)
 
 		for (auto child : children)
 		{
-			if (child.y < 0 || child.x < 0 || child.y >= colMap.size() || child.x >= colMap.front().size())
+			if (child.y < 0 || child.x < 0 || child.y >= levelHeight || child.x >= levelWidth)
 				continue;
 			if (colMap[child.y][child.x] == 1)
 				continue;

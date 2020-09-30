@@ -1,5 +1,7 @@
 #include "AiProcessor.h"
 
+#include <curses.h>
+
 int AiProcessor::processAi(Actor &actor)
 {
 	switch(actor.aiType)
@@ -15,35 +17,15 @@ int AiProcessor::processAi(Actor &actor)
 
 int AiProcessor::circle(Actor &actor)
 {
-	static int dx = 1, dy = 0; 
+	Astar astar(actor.y, actor.x, player->y, player->x);
+	vector< Position> path;
+	path = astar.compute(colMap); 
 	
-	int result = move(actor, colMap, dy, dx);
-
-	if (result == 0)
+	if (path.size() > 0)
 	{
-		if(dy == 0 && dx == 1)
-		{
-			dy = 1;
-			dx = 0;
-		}
-		else if(dy == 1 && dx == 0)
-		{
-			dy = 0;
-			dx = -1;
-		}
-		else if(dy == 0 && dx == -1)
-		{
-			dy = -1;
-			dx = 0;
-		}
-		else
-		{
-			dy = 0;
-			dx = 1;
-		}
-		
-		result = move(actor, colMap, dy, dx);
+		attackMove(*player, colMap, actor, -path.back().y, path.back().x);
+		return 1;
 	}
 
-	return result;
+	return 0;
 }

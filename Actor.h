@@ -5,11 +5,13 @@
 
 struct Actor : public Entity
 {
-	Actor(pos y, pos x, char model, bool visible, unsigned aiType) : Entity(y, x, model, visible), aiType(aiType) { }
+	Actor(pos y, pos x, char model, bool visible, int aiType) : Entity(y, x, model, visible), aiType(aiType) { }
 	Actor(pos y, pos x, char model) : Actor(y, x, model, true, 0) { }
 	Actor() : Entity(), aiType(0) { } 
 	
-	unsigned aiType;
+	int aiType;
+	int health = 20;
+	int attackPower = 2;
 };
 
 #endif

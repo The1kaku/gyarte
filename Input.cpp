@@ -9,13 +9,13 @@ int InputProcessor::process(int input, Player &player)
 			*running = false;
 			return 1;
 		case KEY_UP: 
-			return move(player.me, colMap, -1, 0);
+			return attackMove(monsters, colMap, player.me, -1, 0);
 		case KEY_RIGHT:
-			return move(player.me, colMap, 0, 1);
+			return attackMove(monsters, colMap, player.me, 0, 1);
 		case KEY_DOWN:
-			return move(player.me, colMap, 1, 0);
+			return attackMove(monsters, colMap, player.me, 1, 0);
 		case KEY_LEFT:
-			return move(player.me, colMap, 0, -1);
+			return attackMove(monsters, colMap, player.me, 0, -1);
 		default: 
 			return 0;	
 	}
