@@ -6,11 +6,6 @@
 #include <vector>
 #include <cmath>
 #include <optional>
-
-using std::vector;
-
-
-
 struct Node
 {
 	Node(int y, int x, int parentY, int parentX) :
@@ -34,8 +29,8 @@ struct Astar
 	Node startNode;
 	Node finishNode;	
 	
-	vector< Node> openList;
-	vector< Node> closedList;
+	std::vector< Node> openList;
+	std::vector< Node> closedList;
 	
 
 	
@@ -50,7 +45,7 @@ struct Astar
 	}
 	
 
-	vector<Position> compute(IntMap colMap);
+	std::vector<Position> compute(IntMap colMap);
 
 };
 

@@ -18,7 +18,7 @@ int AiProcessor::processAi(Actor &actor)
 int AiProcessor::circle(Actor &actor)
 {
 	Astar astar(actor.y, actor.x, player->y, player->x);
-	vector< Position> path;
+	std::vector< Position> path;
 	path = astar.compute(colMap); 
 	
 	if (path.size() > 0)

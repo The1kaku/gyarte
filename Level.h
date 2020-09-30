@@ -8,7 +8,7 @@
 #include "Actor.h"
 #include "Globals.h"
 
-using std::vector; using std::string;
+using std::string;
 
 struct Level
 {
@@ -24,10 +24,10 @@ struct Level
 	int getColType(char c);
 	IntMap initColMap();
 	
-	vector< string> map;
+	std::vector< string> map;
 	IntMap colMap;	
 	
-	vector< Actor> monsters = {Actor(4, 4, 'N', true, 1)};
+	std::vector< Actor> monsters = {Actor(4, 4, 'N', true, 1), Actor(1, 5, 'N', true, 1)};
 };
 
 #endif

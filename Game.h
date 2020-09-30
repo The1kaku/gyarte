@@ -10,8 +10,6 @@
 #include "Globals.h"
 #include "Astar.h"
 
-using std::vector;
-
 struct Game
 {
 	Game();

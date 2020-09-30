@@ -8,8 +8,6 @@
 #include <vector>
 #include "astar.h"
 
-using std::vector;
-
 class AiProcessor
 {
 	private:

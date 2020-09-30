@@ -6,9 +6,9 @@ Astar::Astar(int yStart, int xStart, int yFinish, int xFinish)
 	: startNode(yStart, xStart, -1, -1), finishNode(yFinish, xFinish)
 { }	
 
-vector< Position> Astar::compute(IntMap colMap)
+std::vector< Position> Astar::compute(IntMap colMap)
 {
-	vector< Position> res;
+	std::vector< Position> res;
 	
 	openList.push_back(startNode);
 
@@ -57,9 +57,9 @@ vector< Position> Astar::compute(IntMap colMap)
 		// add it to closedList 
 		
 		Node currentNode = openList.front();
-		vector< Node>::iterator currentNodeIt = openList.begin();
+		std::vector< Node>::iterator currentNodeIt = openList.begin();
 
-		for (vector< Node>::iterator it = openList.begin(); it != openList.end(); ++it)
+		for (std::vector< Node>::iterator it = openList.begin(); it != openList.end(); ++it)
 		{
 			if (it->f < currentNode.f)
 			{
@@ -89,7 +89,7 @@ vector< Position> Astar::compute(IntMap colMap)
 		}
 
 		// genChildren
-		vector< Node> children;
+		std::vector< Node> children;
 
 		children = {
 			Node(currentNode.y - 1, currentNode.x, currentNode.y, currentNode.x),

@@ -5,8 +5,6 @@
 #include "Item.h"
 #include <vector>
 
-using std::vector;
-
 struct Player
 {
 	Player(pos y, pos x, char model, bool visible, int inventorySize) : me(y, x, model, visible, -1), inventorySize(inventorySize) { }
@@ -15,7 +13,7 @@ struct Player
 	Actor me;
 	
 	int inventorySize;
-	vector< Item> inventory;
+	std::vector< Item> inventory;
 	
 	int putInInventory(Item item);
 	int putInInventory(Item item, size_t amount);

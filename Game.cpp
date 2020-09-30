@@ -62,7 +62,7 @@ void Game::loop()
 			}
 			waddch(playerWin.win, '\n');
 		}
-		for (vector< Actor>::iterator monster = level.monsters.begin(); monster != level.monsters.end(); )
+		for (std::vector< Actor>::iterator monster = level.monsters.begin(); monster != level.monsters.end(); )
 		{
 			if (monster->health <= 0)
 			{
