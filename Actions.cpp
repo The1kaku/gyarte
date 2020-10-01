@@ -1,4 +1,5 @@
 #include "Actions.h"
+#include <cmath>
 
 int checkCollision(IntMap colMap, pos y, pos x)
 { 
@@ -18,12 +19,31 @@ int move(Actor &actor, IntMap colMap, int dy, int dx)
 	return 0;
 }
 
+int getDamage(int damage, int armour)
+{
+	double val = 0;
+	if (armour >= 0)
+	{
+		val = damage * (100.0 / (100.0 + armour));
+	}
+	else
+	{
+		val = damage * (2.0 - (100.0 / (100.0 - armour)));
+	}
+	return round(val);
+}
 
 int attack(Actor &attacker, Actor &defender)
 {
-	defender.health -= attacker.attackPower;
+	int val = 0;
+	val += getDamage(attacker.weapon.impact, defender.armour.impact);
+	val += getDamage(attacker.weapon.pierce, defender.armour.pierce);
+	val += getDamage(attacker.weapon.slash, defender.armour.slash);
+	defender.health -= val;
 	return 1;
 }
+
+
 
 int attackMove(std::vector< Actor> *defenders, IntMap colMap, Actor &actor, int dy, int dx)
 {

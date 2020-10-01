@@ -79,7 +79,7 @@ void Game::aiTurn()
 		else
 		{
 			aiProcessor.updateColMap(level.generateColMap());
-			infoWin.addInt(aiProcessor.processAi(*monster));
+			aiProcessor.processAi(*monster);
 			gameWin.addActor(*monster);
 			++monster;
 		}	
@@ -89,10 +89,14 @@ void Game::aiTurn()
 void Game::updateInfo()
 {
 	static int cnt = 0;
-	infoWin.addStr("\nTurn_Count: ");
-	infoWin.addInt(cnt++);
-	infoWin.addStr("\nPlayer_HP: ");
-	infoWin.addInt(player.me.health);
+	playerWin.addStr("\nTurn_Count: ");
+	playerWin.addInt(cnt++);
+	playerWin.addStr("\nPlayer_HP: ");
+	playerWin.addInt(player.me.health);
+	playerWin.addStr("\nPlayer_MP: ");
+	playerWin.addInt(player.magicProwess);
+	playerWin.addStr("\nPlayer_Gold: ");
+	playerWin.addInt(player.gold);
 }
 
 void Game::refreshWindows()

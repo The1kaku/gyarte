@@ -8,6 +8,7 @@
 #include <vector>
 #include "astar.h"
 
+
 class AiProcessor
 {
 	private:

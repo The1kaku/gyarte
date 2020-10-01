@@ -17,6 +17,10 @@ struct Player
 	
 	int putInInventory(Item item);
 	int putInInventory(Item item, size_t amount);
+	
+	
+	int gold = 0;
+	int magicProwess = 0;	
 };
 
 #endif
